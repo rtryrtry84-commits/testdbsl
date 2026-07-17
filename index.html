@@ -8,21 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #080b1c;
-    --bg-1: #0b1029;
-    --bg-2: #0e1436;
-    --card: #10173a;
-    --card-2: #131b45;
-    --border: rgba(139,110,255,0.18);
-    --border-strong: rgba(139,110,255,0.4);
-    --purple: #7C5CFA;
+    --bg: #141a37;
+    --bg-1: #1a2145;
+    --bg-2: #1e264e;
+    --card: #1e2550;
+    --card-2: #262f60;
+    --border: rgba(154,133,255,0.26);
+    --border-strong: rgba(154,133,255,0.55);
+    --purple: #8B6BFC;
     --purple-2: #6C4CE0;
-    --blue: #4C7CF5;
-    --cyan: #38BDF8;
-    --text: #EEF1FC;
-    --muted: #8B93BE;
-    --muted-2: #6670A0;
-    --grad: linear-gradient(120deg, #8A5CF6 0%, #6C4CE0 45%, #4C7CF5 100%);
+    --blue: #5C8AFF;
+    --cyan: #4FC9FB;
+    --text: #F5F7FF;
+    --muted: #ADB4DE;
+    --muted-2: #8890C2;
+    --grad: linear-gradient(120deg, #9A72FF 0%, #7C5CE8 45%, #5C8AFF 100%);
     --font-display: 'Sora', sans-serif;
     --font-body: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -44,13 +44,13 @@
   /* ---------- circuit background ---------- */
   .circuit-bg{
     position:fixed; inset:0; z-index:0; pointer-events:none;
-    opacity:0.55;
+    opacity:0.7;
   }
   .circuit-bg svg{width:100%; height:100%;}
   .trace{
-    fill:none; stroke:rgba(124,92,246,0.22); stroke-width:1.4;
+    fill:none; stroke:rgba(154,133,255,0.3); stroke-width:1.4;
   }
-  .node{ fill: rgba(124,92,246,0.35); }
+  .node{ fill: rgba(154,133,255,0.45); }
   .pulse{
     fill:none; stroke:url(#pulseGrad); stroke-width:2.2;
     stroke-dasharray: 6 400; stroke-dashoffset:0;
@@ -62,9 +62,9 @@
   .noise-glow{
     position:fixed; inset:0; z-index:0; pointer-events:none;
     background:
-      radial-gradient(60% 45% at 15% 8%, rgba(124,92,246,0.14), transparent 60%),
-      radial-gradient(50% 40% at 90% 15%, rgba(76,124,245,0.12), transparent 60%),
-      radial-gradient(60% 50% at 50% 100%, rgba(124,92,246,0.10), transparent 60%);
+      radial-gradient(60% 45% at 15% 8%, rgba(139,107,252,0.22), transparent 60%),
+      radial-gradient(50% 40% at 90% 15%, rgba(92,138,255,0.18), transparent 60%),
+      radial-gradient(60% 50% at 50% 100%, rgba(139,107,252,0.16), transparent 60%);
   }
 
   .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; position:relative; z-index:2;}
@@ -96,7 +96,22 @@
     white-space:nowrap;
   }
   .nav-cta:hover{ transform:translateY(-1px); box-shadow:0 10px 26px -6px rgba(124,92,246,0.85); }
-  .burger{ display:none; }
+  .burger{
+    display:none; width:38px; height:38px; border-radius:9px; border:1px solid var(--border);
+    background:rgba(255,255,255,0.03); align-items:center; justify-content:center; cursor:pointer;
+    flex-shrink:0;
+  }
+  .burger svg{ width:19px; height:19px; stroke:var(--text); }
+  .mobile-menu{
+    display:none; flex-direction:column; gap:2px; padding:10px 20px 18px;
+    background:rgba(20,26,55,0.98); border-top:1px solid var(--border);
+  }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{
+    padding:13px 6px; font-size:15px; color:var(--muted); border-bottom:1px solid var(--border);
+  }
+  .mobile-menu a:last-of-type{ border-bottom:none; }
+  .mobile-menu .nav-cta{ margin-top:12px; text-align:center; justify-content:center; }
 
   /* ---------- buttons ---------- */
   .btn{
@@ -315,26 +330,51 @@
 
   @media (max-width: 900px){
     .nav-links{ display:none; }
+    .nav-cta{ display:none; }
+    .burger{ display:flex; }
+    .nav{ padding:12px 20px; }
+    .hero{ padding:120px 0 60px; }
     .problems-grid{ grid-template-columns:1fr; }
-    .adv-row{ grid-template-columns:50px 1fr; grid-template-areas:"n t" ". p"; }
+    .adv-row{ grid-template-columns:50px 1fr; grid-template-areas:"n t" ". p"; row-gap:8px; padding:20px; }
     .adv-row .num{ grid-area:n; }
     .adv-row h3{ grid-area:t; }
     .adv-row p{ grid-area:p; }
-    .solution{ grid-template-columns:1fr; gap:40px; }
+    .solution{ grid-template-columns:1fr; gap:36px; }
     .icon-grid{ grid-template-columns:1fr 1fr; }
     .stats-strip{ grid-template-columns:1fr 1fr; }
-    .pipeline{ flex-direction:column; gap:28px; }
+    .pipeline{ flex-direction:column; gap:28px; align-items:flex-start; }
     .pipeline::before{ display:none; }
+    .pipe-step{ flex-direction:row; text-align:left; gap:16px; }
+    .pipe-icon{ margin-bottom:0; flex-shrink:0; }
+    .pipe-step p{ max-width:none; }
     .cta-block{ grid-template-columns:1fr; }
+    .cta-left, .cta-right{ padding:32px 24px; }
     .form-grid{ grid-template-columns:1fr; }
     .audience-grid{ grid-template-columns:1fr; }
-    .step{ grid-template-columns:40px 40px 1fr; gap:14px;}
-    .steps::before{ left:60px; }
+    .step{ grid-template-columns:34px 40px 1fr; gap:12px;}
+    .steps::before{ left:51px; }
+    section{ padding:72px 0; }
+    .section-desc{ margin-bottom:36px; }
   }
-  @media (max-width:560px){
-    .icon-grid{ grid-template-columns:1fr; }
-    .stats-strip{ grid-template-columns:1fr 1fr; }
+  @media (max-width:640px){
     .wrap{ padding:0 20px; }
+    .hero-logo{ height:64px; margin-bottom:24px; }
+    .hero h1{ margin-bottom:16px; }
+    .hero h2{ margin-bottom:16px; }
+    .hero-actions{ flex-direction:column; align-items:stretch; gap:12px; }
+    .hero-actions .btn{ justify-content:center; }
+    .icon-grid{ grid-template-columns:1fr; }
+    .stats-strip{ grid-template-columns:1fr 1fr; gap:10px; }
+    .stat{ padding:18px 8px; }
+    .stat .n{ font-size:26px; }
+    .problem-card{ padding:22px; }
+    .problem-card h3{ max-width:100%; }
+    .problem-card p{ max-width:100%; }
+    .dashboard{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .dash-body{ padding:14px; min-width:480px; }
+    .cta-left h3{ font-size:24px; }
+    .foot-row{ flex-direction:column; align-items:flex-start; }
+    .brand span{ display:none; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -415,6 +455,17 @@
       <a href="#contact">Контакты</a>
     </nav>
     <a href="#contact" class="nav-cta">Получить доступ</a>
+    <button class="burger" id="burger-btn" aria-label="Меню">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#problems">Проблемы рынка</a>
+    <a href="#solution">Решение</a>
+    <a href="#capabilities">Возможности</a>
+    <a href="#steps">Как получить</a>
+    <a href="#contact">Контакты</a>
+    <a href="#contact" class="btn btn-primary nav-cta">Получить доступ</a>
   </div>
 </header>
 
@@ -733,6 +784,12 @@ const header = document.getElementById('site-header');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 20);
 });
+
+// ---------- mobile menu ----------
+const burgerBtn = document.getElementById('burger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+burgerBtn.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
 // ---------- reveal on scroll ----------
 const revealEls = document.querySelectorAll('.reveal, .problem-card, .icon-card, .aud-card, .step, .pipe-step');
